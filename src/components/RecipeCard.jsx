@@ -1,9 +1,14 @@
-
+import { Link } from "react-router";
 
 const RecipeCard = (props) => {
   let favorites=props.favorites;
   let setFavorites=props.setFavorites;
-  function handleClick() {
+
+  function handleClick(event) {
+    console.log("Favorites btn clicked")
+    event.preventDefault();
+    event.stopPropagation();
+    
     if(!favorites.includes(props.id)){
       setFavorites([...favorites,props.id]);
     }else{
@@ -11,6 +16,7 @@ const RecipeCard = (props) => {
     }
   }
   return (
+    <Link to={`/recipes/${props.id}`}>
     <div className="flex flex-col gap-5
     shadow-md shadow-emerald-800
     hover:shadow-2xl hover:shadow-emerald-500/30
@@ -23,11 +29,12 @@ const RecipeCard = (props) => {
         <p>👨🏻‍🍳{props.level}</p>
         <p>⭐{props.rating}</p>
       </div>
-      <button className="text-xl text-gray-300 bg-emerald-900 p-3 rounded-3xl" 
+      <button className=" cursor-pointer text-xl text-gray-300 bg-emerald-900 p-3 rounded-3xl" 
       onClick={handleClick}>
         {favorites.includes(props.id)?"Remove from favorites":"Add to favorites"}
       </button>
     </div>
+    </Link>
   )
 }
 

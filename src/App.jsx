@@ -5,6 +5,7 @@ import HeroSection from './components/HeroSection'
 import RecipeGrid from './components/RecipeGrid'
 import { useEffect, useState } from 'react'
 import Favorites from './components/Favorites'
+import RecipeDetails from './components/RecipeDetails'
 
 function App() {
   const [search,setSearch]=useState("");
@@ -41,6 +42,12 @@ function App() {
             <Favorites recipe={recipe} favorites={favorites} setFavorites={setFavorites} />
           }
         />
+        <Route
+          path="/recipes/:id"
+          element={
+            <RecipeDetails recipe={recipe} />
+          }
+        />
       </Routes>
       </BrowserRouter>
     </div>
@@ -48,3 +55,6 @@ function App() {
 }
 
 export default App
+
+
+//useParams()-React Router used to read the recipe ID(1) from /recipes/1 on the details page
