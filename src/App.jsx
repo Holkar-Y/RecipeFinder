@@ -10,6 +10,7 @@ import RecipeDetails from './components/RecipeDetails'
 function App() {
   const [search,setSearch]=useState("");
   const [recipe, setRecipe]=useState([]);
+  const [sortBy, setSortBy]=useState("default");
 
   const [favorites,setFavorites]=useState(()=>{
    const savedFavorites=localStorage.getItem("favorites");
@@ -32,7 +33,7 @@ function App() {
           element={
             <>
               <HeroSection search={search} setSearch={setSearch} />
-              <RecipeGrid search={search} favorites={favorites} setFavorites={setFavorites} recipe={recipe} setRecipe={setRecipe}/>
+              <RecipeGrid search={search} favorites={favorites} setFavorites={setFavorites} recipe={recipe} setRecipe={setRecipe} sortBy={sortBy} setSortBy={setSortBy}/>
             </>
           }
         />
