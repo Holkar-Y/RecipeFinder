@@ -1,7 +1,17 @@
 import React from 'react'
-import { NavLink } from 'react-router'
+import { NavLink, useNavigate } from 'react-router'
 
-const Navbar = ({recipe, favorites}) => {
+const Navbar = ({recipe, favorites,currentUser,setCurrentUser, setFavorites}) => {
+
+  const navigate=useNavigate();
+  
+  function handleLogout(){
+    localStorage.removeItem("currentUser");
+    setCurrentUser(null);
+    setFavorites([]);
+    navigate("/");
+  }
+
   return (
     <nav className="bg-emerald-950 flex items-center p-3 text-white">
       <h3 className="text-2xl flex-1">RecipeFinder</h3>
@@ -14,6 +24,20 @@ const Navbar = ({recipe, favorites}) => {
         </NavLink>
 
         <NavLink to="/profile" className="hover:text-amber-600">Profile</NavLink>
+
+        
+          {currentUser?( 
+          <button 
+            onClick={handleLogout}
+            className="hover:text-amber-600">
+              Logout
+          </button>
+          ):(
+          <NavLink to="/login" className="hover:text-amber-600">
+            Login
+          </NavLink>
+          )}
+        
 
       </section>
     </nav>

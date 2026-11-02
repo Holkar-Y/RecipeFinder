@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import RecipeCard from "./RecipeCard"
 
-const RecipeGrid = ({search, favorites, setFavorites, recipe, setRecipe, sortBy, setSortBy}) => {
+const RecipeGrid = ({search, favorites, setFavorites, recipe, setRecipe, sortBy, setSortBy, currentUser}) => {
   const [load, setLoad]=useState(true);
   const [error, setError]=useState("");
   const [difficulty, setDifficulty]=useState("all");
@@ -71,7 +71,7 @@ const RecipeGrid = ({search, favorites, setFavorites, recipe, setRecipe, sortBy,
          error? error:
          sortedRecipes.length===0? "No recipes found. Try another search.":
          sortedRecipes.map((item)=>(
-          <RecipeCard key={item.id} id={item.id} name={item.name} time={item.prepTimeMinutes + item.cookTimeMinutes} image={item.image} level={item.difficulty} rating={item.rating} favorites={favorites} setFavorites={setFavorites}/>
+          <RecipeCard key={item.id} id={item.id} name={item.name} time={item.prepTimeMinutes + item.cookTimeMinutes} image={item.image} level={item.difficulty} rating={item.rating} favorites={favorites} setFavorites={setFavorites} currentUser={currentUser}/>
         ))}
       </div>
     </section>

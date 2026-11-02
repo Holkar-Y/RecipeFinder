@@ -1,13 +1,19 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const RecipeCard = (props) => {
   let favorites=props.favorites;
   let setFavorites=props.setFavorites;
+  const navigate=useNavigate();
 
   function handleClick(event) {
     console.log("Favorites btn clicked")
     event.preventDefault();
     event.stopPropagation();
+
+    if(!props.currentUser){
+      navigate('/login');
+      return;
+    }
     
     if(!favorites.includes(props.id)){
       setFavorites([...favorites,props.id]);
