@@ -2,7 +2,7 @@ import React from 'react'
 import RecipeCard from './RecipeCard'
 import { useNavigate } from 'react-router'
 
-const Favorites = ({recipe, favorites, setFavorites}) => {
+const Favorites = ({recipe, favorites, setFavorites, currentUser}) => {
   const navigate=useNavigate();
   return (
     <div>
@@ -13,7 +13,7 @@ const Favorites = ({recipe, favorites, setFavorites}) => {
         </div>
       :<div className='grid grid-cols-1 md:grid-cols-4 gap-10 p-10'>
         {recipe.filter((item)=>favorites.includes(item.id)).map((item)=>(
-            <RecipeCard  key={item.id} id={item.id} name={item.name} time={item.prepTimeMinutes + item.cookTimeMinutes} image={item.image} level={item.difficulty} rating={item.rating} favorites={favorites} setFavorites={setFavorites}/>
+            <RecipeCard  key={item.id} id={item.id} name={item.name} time={item.prepTimeMinutes + item.cookTimeMinutes} image={item.image} level={item.difficulty} rating={item.rating} favorites={favorites} setFavorites={setFavorites} currentUser={currentUser}/>
         ))}
       </div>
       }

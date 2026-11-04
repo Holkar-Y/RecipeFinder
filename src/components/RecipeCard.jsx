@@ -6,7 +6,6 @@ const RecipeCard = (props) => {
   const navigate=useNavigate();
 
   function handleClick(event) {
-    console.log("Favorites btn clicked")
     event.preventDefault();
     event.stopPropagation();
 

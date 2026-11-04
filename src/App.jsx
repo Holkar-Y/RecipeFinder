@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router'
 import './App.css'
 import Navbar from './components/Navbar'
 import HeroSection from './components/HeroSection'
@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import Favorites from './components/Favorites'
 import RecipeDetails from './components/RecipeDetails'
 import Auth from '../pages/Auth'
+import Profile from '../pages/Profile'
 
 function App() {
   const [search,setSearch]=useState("");
@@ -58,8 +59,9 @@ function App() {
         />
         <Route 
           path='/favorites'
-          element={
-            <Favorites recipe={recipe} favorites={favorites} setFavorites={setFavorites} />
+          element={currentUser?
+            <Favorites recipe={recipe} favorites={favorites} setFavorites={setFavorites} currentUser={currentUser}/>:
+            <Navigate to='/login' replace/>
           }
         />
         <Route
@@ -69,8 +71,14 @@ function App() {
           }
         />
         <Route
-        path='/login'
-        element={<Auth currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
+          path='/login'
+          element={<Auth currentUser={currentUser} setCurrentUser={setCurrentUser}/>} 
+        />
+        <Route
+          path='/profile'
+          element={currentUser?<Profile currentUser={currentUser} favorites={favorites} />:
+          <Navigate to="/login" replace/>}
+        />
       </Routes>
       </BrowserRouter>
     </div>
