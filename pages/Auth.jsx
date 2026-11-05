@@ -92,49 +92,49 @@ const Auth = ({setCurrentUser}) => {
     }
 
   return (
-    <div className='bg-amber-950 flex flex-col h-screen max-w-full justify-center items-center'>
+    <div className='bg-amber-950 flex flex-col min-h-[calc(100vh-56px)] max-w-full justify-center items-center px-4 py-8'>
         
       {isLogin?
-      <form onSubmit={handleLogin} className="flex flex-col gap-10 bg-emerald-950 p-8 rounded-4xl ">
+      <form onSubmit={handleLogin} className="flex flex-col gap-6 sm:gap-10 bg-emerald-950 p-5 sm:p-8 rounded-3xl sm:rounded-4xl w-full max-w-md">
 
         <p className='text-xl'>Login to continue exploring delicious recipes.</p>
 
         <div className='flex flex-col'>
             <label htmlFor="log-email">Email Address</label>
-            <input required type="email" id='log-email' value={loginEmail} onChange={(e)=>setLoginEmail(e.target.value)} placeholder='Enter your email' className="p-3 rounded-lg outline-none focus:ring-2 focus:ring-emerald-500 bg-emerald-900 mb-4"/>
+            <input required type="email" id='log-email' value={loginEmail} onChange={(e)=>setLoginEmail(e.target.value)} placeholder='Enter your email' className="w-full p-3 rounded-lg outline-none focus:ring-2 focus:ring-emerald-500 bg-emerald-900 mb-4"/>
 
             <label htmlFor="log-password">Password</label>
-            <input required type="password" id='log-password' value={loginPassword} onChange={(e)=>setLoginPassword(e.target.value)} placeholder='Enter your password' className="p-3 rounded-lg outline-none focus:ring-2 focus:ring-emerald-500 bg-emerald-900 mb-4"/>
+            <input required type="password" id='log-password' value={loginPassword} onChange={(e)=>setLoginPassword(e.target.value)} placeholder='Enter your password' className="w-full p-3 rounded-lg outline-none focus:ring-2 focus:ring-emerald-500 bg-emerald-900 mb-4"/>
 
             {err && <p className='text-red-700'>{err}</p>}
 
-            <button type='submit' className='bg-amber-900 rounded-2xl p-1.5 cursor-pointer'>Login</button>
+            <button type='submit' className='w-full bg-amber-900 rounded-2xl p-2 cursor-pointer'>Login</button>
         </div>
 
         <p>Don't have an account? <button type='button' onClick={()=>setIsLogin(false)}>Register</button></p>
       </form>
       
 
-      :<form onSubmit={handleRegister} className="flex flex-col gap-7 bg-emerald-950 p-8 rounded-4xl ">
+      :<form onSubmit={handleRegister} className="flex flex-col gap-6 bg-emerald-950 p-5 sm:p-8 rounded-3xl sm:rounded-4xl w-full max-w-md">
 
         <p className='text-xl'>Register to continue exploring delicious recipes.</p>
 
         <div className='flex flex-col'>
         <label htmlFor='name'>Name</label>
-        <input required type="text" id='name' placeholder='Enter your name' value={name} onChange={(e)=>setName(e.target.value)} className="p-3 rounded-lg outline-none focus:ring-2 focus:ring-emerald-500 bg-emerald-900 mb-4"/>
+        <input required type="text" id='name' placeholder='Enter your name' value={name} onChange={(e)=>setName(e.target.value)} className="w-full p-3 rounded-lg outline-none focus:ring-2 focus:ring-emerald-500 bg-emerald-900 mb-4"/>
 
         <label htmlFor="reg-email">Email Address</label>
-        <input required type="email" id='reg-email' placeholder='Enter your email' value={email} onChange={(e)=>setEmail(e.target.value)} className="p-3 rounded-lg outline-none focus:ring-2 focus:ring-emerald-500 bg-emerald-900 mb-4"/>
+        <input required type="email" id='reg-email' placeholder='Enter your email' value={email} onChange={(e)=>setEmail(e.target.value)} className="w-full p-3 rounded-lg outline-none focus:ring-2 focus:ring-emerald-500 bg-emerald-900 mb-4"/>
 
         <label htmlFor="reg-password">Password</label>
-        <input required type="password" id='reg-password' placeholder='Enter your password' value={password} onChange={(e)=>setPassword(e.target.value)} className="p-3 rounded-lg outline-none focus:ring-2 focus:ring-emerald-500 bg-emerald-900 mb-4"/>
+        <input required type="password" id='reg-password' placeholder='Enter your password' value={password} onChange={(e)=>setPassword(e.target.value)} className="w-full p-3 rounded-lg outline-none focus:ring-2 focus:ring-emerald-500 bg-emerald-900 mb-4"/>
 
         <label htmlFor="cPassword">Confirm Password</label>
-        <input required type="password" id='cPassword' placeholder='Enter your password again' value={cPassword} onChange={(e)=>setCPassword(e.target.value)} className="p-3 rounded-lg outline-none focus:ring-2 focus:ring-emerald-500 bg-emerald-900 mb-4"/>
+        <input required type="password" id='cPassword' placeholder='Enter your password again' value={cPassword} onChange={(e)=>setCPassword(e.target.value)} className="w-full p-3 rounded-lg outline-none focus:ring-2 focus:ring-emerald-500 bg-emerald-900 mb-4"/>
 
         {err && <p className='text-red-700'>{err}</p>}
 
-        <button type='submit' className='bg-amber-900 rounded-2xl p-1.5 cursor-pointer'>Register</button>
+        <button type='submit' className='w-full bg-amber-900 rounded-2xl p-2 cursor-pointer'>Register</button>
 
         </div>
 
