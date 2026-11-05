@@ -2,6 +2,8 @@
 
 A responsive recipe discovery application built with React.js that allows users to explore recipes, search by ingredients or recipe names, filter by difficulty, sort recipes, and manage their personal favorites.
 
+[Live Demo](https://recipe-finder-dr7g.vercel.app/)
+
 ## ✨ Features
 
 - **Recipe Discovery:** Fetch and display recipes using the DummyJSON Recipes API.
