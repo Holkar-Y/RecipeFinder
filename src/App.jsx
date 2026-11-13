@@ -43,7 +43,7 @@ function App() {
   },[favorites,currentUser,favoritesUserId])
 
   return (
-    <div className="bg-gray-950 text-white min-h-screen">
+    <div className="min-h-screen bg-[#F8F6F0] text-[#252B28]">
       <BrowserRouter>
       <Navbar favorites={favorites} recipe={recipe} currentUser={currentUser} setCurrentUser={setCurrentUser} setFavorites={setFavorites}/>
 

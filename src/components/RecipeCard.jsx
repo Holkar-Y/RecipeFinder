@@ -1,49 +1,80 @@
+
 import { Link, useNavigate } from "react-router";
 
 const RecipeCard = (props) => {
-  let favorites=props.favorites;
-  let setFavorites=props.setFavorites;
-  const navigate=useNavigate();
+  const favorites = props.favorites;
+  const setFavorites = props.setFavorites;
+  const navigate = useNavigate();
 
   function handleClick(event) {
     event.preventDefault();
     event.stopPropagation();
 
-    if(!props.currentUser){
-      navigate('/login');
+    if (!props.currentUser) {
+      navigate("/login");
       return;
     }
-    
-    if(!favorites.includes(props.id)){
-      setFavorites([...favorites,props.id]);
-    }else{
-      setFavorites(favorites.filter((id)=>id!==props.id));
+
+    if (!favorites.includes(props.id)) {
+      setFavorites([...favorites, props.id]);
+    } else {
+      setFavorites(favorites.filter((id) => id !== props.id));
     }
   }
+
   return (
-    <Link to={`/recipes/${props.id}`} className="block h-full">
-    <div className="h-full flex flex-col gap-4
-    shadow-md shadow-emerald-800
-    hover:shadow-2xl hover:shadow-emerald-500/30
-    transition-all duration-300 ease-in-out
-    border border-emerald-800 rounded-xl p-4 sm:p-5 md:p-6 lg:p-8">
-      <h3 className="text-lg md:text-xl font-medium min-h-12">{props.name}</h3>
+    <div className="surface-card group flex h-full flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1">
 
-      <img src={props.image} alt="image" className="w-full h-36 object-cover rounded-lg"/>
+      {/* Recipe Image */}
+      <Link to={`/recipes/${props.id}`} className="block overflow-hidden">
+        <img
+          src={props.image}
+          alt={props.name}
+          className="h-52 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+      </Link>
 
-      <div className="flex flex-wrap gap-2 justify-between text-xs sm:text-sm text-gray-400 min-h-10">
-        <p>⏱️{props.time} min</p>
-        <p>👨🏻‍🍳{props.level}</p>
-        <p>⭐{props.rating}</p>
+      {/* Recipe Information */}
+      <div className="flex flex-1 flex-col gap-4 p-5">
+
+        <Link to={`/recipes/${props.id}`}>
+          <h3 className="text-xl font-semibold text-[#252B28] transition-colors hover:text-[#D97745]">
+            {props.name}
+          </h3>
+        </Link>
+
+        {/* Recipe Details */}
+        <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-[#777D76]">
+
+          <p>⏱️ {props.time} min</p>
+
+          <p className="rounded-full bg-[#DCE8D8] px-3 py-1 text-[#183D32]">
+            {props.level}
+          </p>
+
+          <p className="font-semibold text-[#D97745]">
+            ⭐ {props.rating}
+          </p>
+
+        </div>
+
+        {/* Favorite Button */}
+        <button
+          className={`btn-primary mt-auto w-full transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] ${
+            favorites.includes(props.id)
+              ? "bg-[#D97745] border-[#D97745]"
+              : ""
+          }`}
+          onClick={handleClick}
+        >
+          {favorites.includes(props.id)
+            ? "♥ Remove from favorites"
+            : "♡ Add to favorites"}
+        </button>
+
       </div>
-
-      <button className="mt-auto cursor-pointer text-base sm:text-lg text-gray-300 bg-emerald-900 p-3 rounded-3xl" onClick={handleClick}>
-        {favorites.includes(props.id)?"Remove from favorites":"Add to favorites"}
-      </button>
-
     </div>
-    </Link>
-  )
-}
+  );
+};
 
-export default RecipeCard
+export default RecipeCard;

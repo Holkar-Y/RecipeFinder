@@ -92,53 +92,84 @@ const Auth = ({setCurrentUser}) => {
     }
 
   return (
-    <div className='bg-amber-950 flex flex-col min-h-[calc(100vh-56px)] max-w-full justify-center items-center px-4 py-8'>
+    <div className="page-container min-h-[calc(100vh-64px)] flex items-center justify-center py-10 px-4">
         
       {isLogin?
-      <form onSubmit={handleLogin} className="flex flex-col gap-6 sm:gap-10 bg-emerald-950 p-5 sm:p-8 rounded-3xl sm:rounded-4xl w-full max-w-md">
+      <form onSubmit={handleLogin} className="surface-card flex flex-col gap-6 p-6 sm:p-8 rounded-2xl w-full max-w-md border border-[#E8E5DC]">
 
-        <p className='text-xl'>Login to continue exploring delicious recipes.</p>
-
-        <div className='flex flex-col'>
-            <label htmlFor="log-email">Email Address</label>
-            <input required type="email" id='log-email' value={loginEmail} onChange={(e)=>setLoginEmail(e.target.value)} placeholder='Enter your email' className="w-full p-3 rounded-lg outline-none focus:ring-2 focus:ring-emerald-500 bg-emerald-900 mb-4"/>
-
-            <label htmlFor="log-password">Password</label>
-            <input required type="password" id='log-password' value={loginPassword} onChange={(e)=>setLoginPassword(e.target.value)} placeholder='Enter your password' className="w-full p-3 rounded-lg outline-none focus:ring-2 focus:ring-emerald-500 bg-emerald-900 mb-4"/>
-
-            {err && <p className='text-red-700'>{err}</p>}
-
-            <button type='submit' className='w-full bg-amber-900 rounded-2xl p-2 cursor-pointer'>Login</button>
+        <div>
+        <p className="eyebrow mb-2">Welcome back</p>
+        <h1 className="font-serif text-3xl font-bold text-[#183D32]">
+            Login to RecipeFinder
+        </h1>
+        <p className="muted-text mt-2">
+            Continue exploring delicious recipes.
+        </p>
         </div>
 
-        <p>Don't have an account? <button type='button' onClick={()=>setIsLogin(false)}>Register</button></p>
+        <div className='flex flex-col'>
+            <label htmlFor="log-email" className="mb-2 text-sm font-semibold text-[#252B28]">Email Address</label>
+            <input required type="email" id='log-email' value={loginEmail} onChange={(e)=>setLoginEmail(e.target.value)} placeholder='Enter your email' className="auth-input w-full rounded-xl border border-[#E8E5DC] bg-[#F8F6F0] p-3 text-[#252B28] outline-none transition mb-4"/>
+
+            <label htmlFor="log-password" className="mb-2 text-sm font-semibold text-[#252B28]">Password</label>
+            <input required type="password" id='log-password' value={loginPassword} onChange={(e)=>setLoginPassword(e.target.value)} placeholder='Enter your password' className="auth-input w-full rounded-xl border border-[#E8E5DC] bg-[#F8F6F0] p-3 text-[#252B28] outline-none transition mb-4"/>
+
+            {err && (<p className="mb-2 rounded-lg bg-red-50 p-3 text-sm text-red-700">{err}</p>)}
+
+            <button
+                type="submit"
+                className="btn-primary w-full py-3"
+            >Login</button>
+        </div>
+
+        <p className="text-sm text-[#777D76]">Don't have an account?<button
+            type="button"
+            onClick={() => setIsLogin(false)}
+            className="ml-2 font-semibold text-[#D97745] hover:underline"
+        >Register</button></p>
+
       </form>
       
 
-      :<form onSubmit={handleRegister} className="flex flex-col gap-6 bg-emerald-950 p-5 sm:p-8 rounded-3xl sm:rounded-4xl w-full max-w-md">
+      :<form onSubmit={handleRegister} className="surface-card flex flex-col gap-6 p-6 sm:p-8 rounded-2xl w-full max-w-md border border-[#E8E5DC]">
 
-        <p className='text-xl'>Register to continue exploring delicious recipes.</p>
+        <div>
+            <p className="eyebrow mb-2">Join our kitchen</p>
+            
+            <h1 className="font-serif text-3xl font-bold text-[#183D32]">Create an Account</h1>
+
+            <p className="muted-text mt-2">Save your favorite recipes and discover something delicious.</p>
+        </div>
 
         <div className='flex flex-col'>
-        <label htmlFor='name'>Name</label>
-        <input required type="text" id='name' placeholder='Enter your name' value={name} onChange={(e)=>setName(e.target.value)} className="w-full p-3 rounded-lg outline-none focus:ring-2 focus:ring-emerald-500 bg-emerald-900 mb-4"/>
+        <label htmlFor='name' className="mb-2 text-sm font-semibold text-[#252B28]">Name</label>
+        <input required type="text" id='name' placeholder='Enter your name' value={name} onChange={(e)=>setName(e.target.value)} className="auth-input w-full rounded-xl border border-[#E8E5DC] bg-[#F8F6F0] p-3 text-[#252B28] outline-none transition mb-4"/>
 
-        <label htmlFor="reg-email">Email Address</label>
-        <input required type="email" id='reg-email' placeholder='Enter your email' value={email} onChange={(e)=>setEmail(e.target.value)} className="w-full p-3 rounded-lg outline-none focus:ring-2 focus:ring-emerald-500 bg-emerald-900 mb-4"/>
+        <label htmlFor="reg-email" className="mb-2 text-sm font-semibold text-[#252B28]">Email Address</label>
+        <input required type="email" id='reg-email' placeholder='Enter your email' value={email} onChange={(e)=>setEmail(e.target.value)} className="auth-input w-full rounded-xl border border-[#E8E5DC] bg-[#F8F6F0] p-3 text-[#252B28] outline-none transition mb-4"/>
 
-        <label htmlFor="reg-password">Password</label>
-        <input required type="password" id='reg-password' placeholder='Enter your password' value={password} onChange={(e)=>setPassword(e.target.value)} className="w-full p-3 rounded-lg outline-none focus:ring-2 focus:ring-emerald-500 bg-emerald-900 mb-4"/>
+        <label htmlFor="reg-password" className="mb-2 text-sm font-semibold text-[#252B28]">Password</label>
+        <input required type="password" id='reg-password' placeholder='Enter your password' value={password} onChange={(e)=>setPassword(e.target.value)} className="auth-input w-full rounded-xl border border-[#E8E5DC] bg-[#F8F6F0] p-3 text-[#252B28] outline-none transition mb-4"/>
 
-        <label htmlFor="cPassword">Confirm Password</label>
-        <input required type="password" id='cPassword' placeholder='Enter your password again' value={cPassword} onChange={(e)=>setCPassword(e.target.value)} className="w-full p-3 rounded-lg outline-none focus:ring-2 focus:ring-emerald-500 bg-emerald-900 mb-4"/>
+        <label htmlFor="cPassword" className="mb-2 text-sm font-semibold text-[#252B28]">Confirm Password</label>
+        <input required type="password" id='cPassword' placeholder='Enter your password again' value={cPassword} onChange={(e)=>setCPassword(e.target.value)} className="auth-input w-full rounded-xl border border-[#E8E5DC] bg-[#F8F6F0] p-3 text-[#252B28] outline-none transition mb-4"/>
 
-        {err && <p className='text-red-700'>{err}</p>}
+        {err && (
+            <p className="mb-1 rounded-lg bg-red-50 p-3 text-sm text-red-700">{err}</p>
+        )}
 
-        <button type='submit' className='w-full bg-amber-900 rounded-2xl p-2 cursor-pointer'>Register</button>
+        <button type='submit' className="btn-primary w-full py-3">Create Account</button>
 
         </div>
 
-        <p>Have an account? <button type='button' onClick={()=>setIsLogin(true)}>Login</button></p>
+        <p className="text-sm text-[#777D76]">
+        Already have an account?
+        <button
+            type="button"
+            onClick={() => setIsLogin(true)}
+            className="ml-2 font-semibold text-[#D97745] hover:underline"
+        >Login</button></p>
+
         </form>
         }
     </div>

@@ -1,12 +1,17 @@
-import React, { useState } from 'react'
-import { NavLink, useNavigate } from 'react-router'
 
-const Navbar = ({recipe, favorites,currentUser,setCurrentUser, setFavorites}) => {
+import { useState } from "react";
+import { NavLink, useNavigate } from "react-router";
 
-  const navigate=useNavigate();
-  const[menuOpen,setMenuOpen]=useState(false);
-  
-  function handleLogout(){
+const Navbar = ({
+  favorites,
+  currentUser,
+  setCurrentUser,
+  setFavorites
+}) => {
+  const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  function handleLogout() {
     localStorage.removeItem("currentUser");
     setCurrentUser(null);
     setFavorites([]);
@@ -14,61 +19,113 @@ const Navbar = ({recipe, favorites,currentUser,setCurrentUser, setFavorites}) =>
     setMenuOpen(false);
   }
 
-  function closeMenu(){
+  function closeMenu() {
     setMenuOpen(false);
   }
 
+  const navLinkClass = ({ isActive }) =>
+    `transition-colors duration-200 ${
+      isActive
+        ? "text-[#D97745] font-semibold"
+        : "text-[#252B28] hover:text-[#D97745]"
+    }`;
+
   return (
-    <nav className="bg-emerald-950 flex items-center p-3 text-white sticky top-0 z-50">
-      <h3 className="text-2xl flex-1">RecipeFinder</h3>
+    <nav className="sticky top-0 z-50 border-b border-[#E8E5DC] bg-[#F8F6F0]/95 backdrop-blur-md">
 
-      <button
-        onClick={() => setMenuOpen(!menuOpen)}
-        className="md:hidden text-3xl px-3 cursor-pointer"
-        aria-label="Toggle navigation menu"
-        aria-expanded={menuOpen}
-      >
-        ☰
-      </button>
+      <div className="page-container flex items-center justify-between py-4">
 
-      <section className={`
-        ${menuOpen ? "flex" : "hidden"}
-        md:flex
-        flex-col md:flex-row
-        gap-4 md:gap-4
-        text-xl
-        absolute md:static
-        top-full right-0
-        w-full md:w-auto
-        bg-emerald-950
-        p-5 md:p-0
-        z-50
-      `}>
-        <NavLink className="hover:text-amber-600" to="/" onClick={closeMenu}>Home</NavLink>
+        {/* Logo */}
+        <NavLink to="/" onClick={closeMenu} className="flex items-center gap-2">
+          <span className="text-3xl transition-transform duration-300 group-hover:rotate-12">🍃</span>
 
-        <NavLink onClick={closeMenu} to="/favorites" className="hover:text-amber-600">
-          Favorites
+          <span className="text-2xl font-bold text-[#183D32]">
+            Recipe<span className="text-[#D97745]">Finder</span>
+          </span>
         </NavLink>
 
-        <NavLink onClick={closeMenu} to="/profile" className="hover:text-amber-600">Profile</NavLink>
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="text-2xl text-[#183D32] md:hidden"
+          aria-label="Toggle navigation menu"
+          aria-expanded={menuOpen}
+        >
+          {menuOpen ? "✕" : "☰"}
+        </button>
 
-        
-          {currentUser?( 
-          <button 
-            onClick={handleLogout}
-            className="hover:text-amber-600">
-              Logout
-          </button>
-          ):(
-          <NavLink onClick={closeMenu} to="/login" className="hover:text-amber-600">
-            Login
+        {/* Navigation Links */}
+        <section
+          className={`
+            ${menuOpen ? "flex" : "hidden"}
+            md:flex
+            flex-col md:flex-row
+            items-stretch md:items-center
+            gap-5 md:gap-8
+            absolute md:static
+            top-full left-0
+            w-full md:w-auto
+            bg-[#F8F6F0] md:bg-transparent
+            border-b md:border-0 border-[#E8E5DC]
+            p-6 md:p-0
+            shadow-md md:shadow-none
+          `}
+        >
+
+          <NavLink
+            to="/"
+            end
+            onClick={closeMenu}
+            className="group flex items-center gap-2 transition-transform duration-300 hover:scale-[1.03] hover:text-amber-600"
+          >
+            Home
           </NavLink>
+
+          <NavLink
+            to="/favorites"
+            onClick={closeMenu}
+            className={navLinkClass}
+          >
+            <span className="flex items-center gap-2">
+              Favorites
+
+              <span className="rounded-full bg-[#DCE8D8] px-2 py-0.5 text-xs text-[#183D32]">
+                {favorites.length}
+              </span>
+            </span>
+          </NavLink>
+
+          {currentUser && (
+            <NavLink
+              to="/profile"
+              onClick={closeMenu}
+              className={navLinkClass}
+            >
+              Profile
+            </NavLink>
           )}
-        
 
-      </section>
+          {currentUser ? (
+            <button
+              onClick={handleLogout}
+              className="rounded-full border border-[#E8E5DC] px-5 py-2 text-[#183D32] transition-colors hover:bg-[#DCE8D8]"
+            >
+              Logout
+            </button>
+          ) : (
+            <NavLink
+              to="/login"
+              onClick={closeMenu}
+              className="rounded-full bg-[#183D32] px-5 py-2 text-center text-white transition-colors hover:bg-[#245443]"
+            >
+              Login
+            </NavLink>
+          )}
+
+        </section>
+      </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
